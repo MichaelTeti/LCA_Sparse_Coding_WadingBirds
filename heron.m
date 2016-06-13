@@ -16,37 +16,36 @@ im=im2double(im);
 im=imresize(im, [64 64]);
 X=im2col(im, [8 8], 'sliding');
 
-
 %Create Dictionary and alpha
 k=300;
 r=randperm(size(X, 2));
 D=X(:, r(1:300));
 alpha=randn(size(D, 2), size(X, 2));
 
-cd('/home/mpcr/Desktop/butterflies-master/Heron/spams-matlab');
-start_spams;
-displayPatches(D); colormap('gray');
-pause;
+for iters=1:10
 
-%Sparse Coding Using LCA
-t=.01;
-h=.0001;
-d=h/t;
-lambda=.01;
-u=zeros(size(alpha));
+    %Sparse Coding Using LCA
+    t=.01;
+    h=.0001;
+    d=h/t;
+    lambda=.01;
+    u=zeros(size(alpha));
 
-for i=1:300
-    a=(u-sign(u).*(lambda)).* (abs(u) > (lambda));
-    u=u+d*(D'*(X-D*alpha)-u-a);
-end
+    for i=1:300
+        alpha=(u-sign(u).*(lambda)).* (abs(u) > (lambda));
+        u=u+d*(D'*(X-D*alpha)-u-alpha);
+    end
 
-%Dictionary Learning
-D=X*pinv(a);
-D=D./repmat(sqrt(sum(D.^2)),[size(D, 1), 1]);
-
+    %Dictionary Learning
+    D=X*pinv(a);
+    D=D./repmat(sqrt(sum(D.^2)),[size(D, 1), 1]);
+end 
 
 %display dictionary        
 cd('/home/mpcr/Desktop/butterflies-master/Heron/spams-matlab');
 start_spams;
 displayPatches(D); colormap('gray');
 pause;
+
+save('HeronDic.mat', 'D');
+
