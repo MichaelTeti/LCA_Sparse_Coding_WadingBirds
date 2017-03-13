@@ -4,7 +4,14 @@ Classifying images of birds using sparse dictionaries.
 ## Background
 A set of images or patch images is essentially an overcomplete set of vectors. A basis for this set, called a sparse dictionary, can be learned for reconstruction or unsupervised classification by minimizing the MSE between the reconstruction using the dictionary, *D*, and the actual data, *b*.
 
-![alt tag](https://github.com/MichaelTeti/LCA_Sparse_Coding_WadingBirds/blob/master/ax%3Db.jpg)
+<p align="center">
+  <b>Some Links:</b><br>
+  <a href="#">Link 1</a> |
+  <a href="#">Link 2</a> |
+  <a href="#">Link 3</a>
+  <br><br>
+  <img src="https://github.com/MichaelTeti/LCA_Sparse_Coding_WadingBirds/blob/master/LCA1.jpg">
+</p>
 
 We use a locally-competitive neural network, proposed in Rozell et al (2008), to learn this dictionary using local competition between nodes.
 
