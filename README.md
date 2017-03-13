@@ -20,6 +20,12 @@ We use a locally-competitive neural network, proposed in Rozell et al (2008), to
 
 This causes the dictionary to be sparse. Once the dictionary is learned, a new example can be classified by obtaining the sparse coefficients for the image with the pre-learned dictionaries. These coefficients can then be pooled over to determine what dictionary, and thus what class, best explains the image. Here, we apply this method to classify images of wading birds as part of a year-long grant from the Everglades Foundation.  
 
+## Methods and Code
+After first reading in an image, we initialize a dictioanary, D, using random patches. k is the number of patches we want in the dictionary.  
+>k=300;  
+>r=randperm(size(X, 2));  
+>D=X(:, r(1:300));  
+
 ## Results
 <p align="center">
   <b>Figure 3: The activations of the coefficients from each dictionary correctly classify the new picture of the bird.</b><br>
