@@ -30,22 +30,22 @@ We also initialize the coefficients for the dictionary, alpha. These values say 
 >alpha=randn(size(D, 2), size(X, 2));
 
 Next, some useful parameters for the network are initialized. d is a scale factor, lambda is the threshold, and u is the input layer of the LCA network. 
->t=.01;
->h=.0001;
->d=h/t;
->lambda=.01;
->u=zeros(size(alpha));
+>t=.01;  
+>h=.0001;  
+>d=h/t;  
+>lambda=.01;  
+>u=zeros(size(alpha));  
 
-Finally, we iterate through the network dynamics for a specified number of iterations (300 in this case). This is the sparse coding step, and each iteration it gives us the coefficients to reconstruct the data with the dictionary that iteration. The first line is actually the thresholding, where sub-threshold activations are made zero.
+Finally, we iterate through the network dynamics for a specified number of iterations (300 in this case). This is the sparse coding step, and each iteration it gives us the coefficients to reconstruct the data with the dictionary that iteration. The first line is actually the thresholding, where sub-threshold activations are made zero.  
 
->for i=1:300
->alpha=(u-sign(u).*(lambda)).* (abs(u) > (lambda));
+>for i=1:300  
+>alpha=(u-sign(u).*(lambda)).* (abs(u) > (lambda));  
 >u=u+d*(D'*(X-D*alpha)-u-alpha);  
   
-After we find the sparse coefficients each iteration, we want to make the dictionary better:
+After we find the sparse coefficients each iteration, we want to make the dictionary better:  
 
->D=X*pinv(a);
->D=D./repmat(sqrt(sum(D.^2)),[size(D, 1), 1]);
+>D=X*pinv(a);  
+>D=D./repmat(sqrt(sum(D.^2)),[size(D, 1), 1]);  
 
 That's all there is to it, finding the best amounts (coefficients) of each patch to use, then, using those, finding a better dictionary. 
 
