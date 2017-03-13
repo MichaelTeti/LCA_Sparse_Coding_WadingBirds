@@ -22,7 +22,7 @@ r=randperm(size(X, 2));
 D=X(:, r(1:300));
 alpha=randn(size(D, 2), size(X, 2));
 
-for iters=1:10
+for iters=1:300
 
     %Sparse Coding Using LCA
     t=.01;
@@ -31,10 +31,9 @@ for iters=1:10
     lambda=.01;
     u=zeros(size(alpha));
 
-    for i=1:300
-        alpha=(u-sign(u).*(lambda)).* (abs(u) > (lambda));
-        u=u+d*(D'*(X-D*alpha)-u-alpha);
-    end
+    alpha=(u-sign(u).*(lambda)).* (abs(u) > (lambda));
+    u=u+d*(D'*(X-D*alpha)-u-alpha);
+
 
     %Dictionary Learning
     D=X*pinv(a);
