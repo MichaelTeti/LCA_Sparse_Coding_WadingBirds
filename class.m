@@ -22,14 +22,14 @@ r=randperm(size(X, 2));
 D=X(:, r(1:300));
 alpha=randn(size(D, 2), size(X, 2));
 
-for iters=1:300
+%Sparse Coding Using LCA
+t=.01;
+h=.0001;
+d=h/t;
+lambda=.01;
+u=zeros(size(alpha));
 
-    %Sparse Coding Using LCA
-    t=.01;
-    h=.0001;
-    d=h/t;
-    lambda=.01;
-    u=zeros(size(alpha));
+for iters=1:300
 
     alpha=(u-sign(u).*(lambda)).* (abs(u) > (lambda));
     u=u+d*(D'*(X-D*alpha)-u-alpha);
